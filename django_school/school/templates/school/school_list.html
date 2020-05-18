@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for school in schools %}
+    
+    <div style="width:80%;margin:4px 4px;background:#eee;">
+        <a href="{% url 'school:detail' pk=school.id  %}">View Detail</a>
+        <h2>{{school.name}}</h2> 
+        <p>{{school.location}}</p>
+        <small>{{school.principal}}</small>
+       
+    </div>
+      
+    {% endfor %}
+</body>
+</html>

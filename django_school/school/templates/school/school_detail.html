@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>School Detail</h2>
+    <p>{{school}}</p>
+    {% if  school.student_school.all %}
+        <h2>School Name is : {{school}}</h2>
+        
+        {% for item in school.student_school.all %}
+
+            
+            <small>Student Name is = > {{item.name}}</small>
+        {% endfor %}
+        <h4>Want to add student ?</h4>
+            <a href="{% url 'school:create_student' %}">New Student</a>
+    {% else %}
+            <h2>No student found for this school <small style="color:red">{{school}}</small>  SCHOOL</h2>
+            <h4>Want to add student ?</h4>
+            <a href="{% url 'school:create_student' %}">New Student</a>
+    
+    {% endif %}
+            
+    
+
+   
+
+</body>
+</html>
