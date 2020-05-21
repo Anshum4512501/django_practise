@@ -35,6 +35,7 @@ class CreateSchoolStudent(LoginRequiredMixin,CreateView):
 
 class SchoolList(LoginRequiredMixin,ListView):
     # queryset = School.objects.all()
+    paginate_by = 2
     context_object_name = 'schools'
     model = School
     # def get_queryset(self):
