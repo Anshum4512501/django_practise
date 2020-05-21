@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for school in schools %}
+
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main" class="container">
+
+    {% if user.is_authenticated %}
+{% for school in schools %}
     
-    <div style="width:80%;margin:4px 4px;background:#eee;">
-        <a href="{% url 'school:detail' pk=school.id  %}">View Detail</a>
-        <h2>{{school.name}}</h2> 
-        <p>{{school.location}}</p>
-        <small>{{school.principal}}</small>
-       
-    </div>
-      
-    {% endfor %}
-</body>
-</html>
+<div style="width:100%;margin:4px 0;background:#eee;" class="p-2">
+
+<h2>{{school.name}}</h2> 
+<p> location {{school.location}}</p>
+<small> principal: {{school.principal}}</small>
+<div class="links mt-3">
+    <span><a type="button" class="btn btn-light" href="{% url 'school:detail' pk=school.id  %}">View Detail</a></span>
+    <span ><a type="button" class="btn btn-light"  href="{% url 'school:delete' pk=school.id  %}">Delete</a></span>
+    <span><a type="button" class="btn btn-light" href="{% url 'school:update' pk=school.id  %}">Update</a></span>    
+</div>
+
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+</main>
+{% endblock %}
+
