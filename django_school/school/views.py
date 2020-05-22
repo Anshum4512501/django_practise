@@ -1,6 +1,6 @@
 from django.shortcuts import render,reverse
 from django.views.generic import CreateView,ListView,DetailView,DeleteView,TemplateView,UpdateView
-from .models import School
+from .models import School,Student
 from .forms import CreateSchoolForm,CreateStudentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -19,6 +19,7 @@ class HomePage(LoginRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_school'] = School.objects.all()
+        context['all_student'] = Student.objects.all()
         return context
 
 class CreateSchool(LoginRequiredMixin,CreateView):
@@ -30,8 +31,21 @@ class CreateSchool(LoginRequiredMixin,CreateView):
 class CreateSchoolStudent(LoginRequiredMixin,CreateView):
     form_class = CreateStudentForm
     # queryset = School.objects.all()
-    
+    context_object_name = 'students'
     template_name = 'school/school_form.html'
+
+class SchoolStudentList(LoginRequiredMixin,ListView):
+    model = Student
+    paginate_by = 2
+    context_object_name = 'students'
+    template_name = 'student/student_list.html'    
+
+
+class SchoolStudentDetail(LoginRequiredMixin,DetailView):
+    model = Student
+    template_name = 'student/student_detail.html'
+    context_object_name = 'student_detail'
+    
 
 class SchoolList(LoginRequiredMixin,ListView):
     # queryset = School.objects.all()

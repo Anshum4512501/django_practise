@@ -1,21 +1,19 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
 <main role="main" class="container">
-
+<h2>Count {{students.count}}</h2>
     {% if user.is_authenticated %}
-{% for school in schools %}
+{% for student in students %}
     
 <div style="width:100%;margin:4px 0;background:#eee;" class="p-2">
 
-<h2>{{school.name}}</h2> 
-<p> location {{school.location}}</p>
-<small> principal: {{school.principal}}</small>
+<h2>{{student.name}}</h2> 
+
 <div class="links mt-3">
-    <span><a type="button" class="btn btn-light" href="{% url 'school:detail' pk=school.id  %}">View Detail</a></span>
-    <span ><a type="button" class="btn btn-light"  href="{% url 'school:delete' pk=school.id  %}">Delete</a></span>
-    <span><a type="button" class="btn btn-light" href="{% url 'school:update' pk=school.id  %}">Update</a></span>    
+    <span><a type="button" class="btn btn-light" href="{% url 'school:student_detail' pk=student.id  %}">View Detail</a></span>
+    <span ><a type="button" class="btn btn-light"  href="{% url 'school:delete' pk=student.id  %}">Delete</a></span>
+    <span><a type="button" class="btn btn-light" href="{% url 'school:update' pk=student.id  %}">Update</a></span>    
 </div>
 
 
@@ -64,4 +62,3 @@
 
 </main>
 {% endblock %}
-
